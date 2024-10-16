@@ -6,50 +6,39 @@ import { GiMatchHead } from "react-icons/gi";
 
 type Props = {
   currentPlayer: UserType,
-  onTake: (value: number) => void
+  onTake: (value: number) => void,
+  matchesCount: number
 };
 
-// TODO - add matchesCount prop to allow user set max number of matches can be taken.
-// Use Array.from and forEach to render buttons.Button may be separate component
+const MAX_GRID_COLUMNS = 3;
 
-export const ButtonBar: React.FC<Props> = ({ currentPlayer, onTake }) => {
+export const ButtonBar: React.FC<Props> = ({
+  currentPlayer,
+  onTake,
+  matchesCount
+}) => {
   return (
-    <div className="box fixed-grid has-5-cols">
+    <div className={`box container fixed-grid has-${MAX_GRID_COLUMNS}-cols`}>
       <div className="grid">
         <div
-          className={cn("control cell is-col-start-3", {
+          className={cn("control cell is-col-start-2", {
             "is-loading": currentPlayer === UserType.Computer,
           })}
         >
           <h2 className="has-text-centered">Take the matches</h2>
         </div>
 
-        <button
-          className="button is-dark cell is-col-start-2"
-          onClick={() => onTake(1)}
-          disabled={currentPlayer === UserType.Computer}
-        >
-          <GiMatchHead />
-        </button>
-
-        <button
-          className="button is-dark cell is-col-start-3"
-          onClick={() => onTake(2)}
-          disabled={currentPlayer === UserType.Computer}
-        >
-          <GiMatchHead />
-          <GiMatchHead />
-        </button>
-
-        <button
-          className="button is-dark cell is-col-start-4"
-          onClick={() => onTake(3)}
-          disabled={currentPlayer === UserType.Computer}
-        >
-          <GiMatchHead />
-          <GiMatchHead />
-          <GiMatchHead />
-        </button>
+        {[...Array(matchesCount)].map((_, index) => (
+          <button
+            key={index}
+            className={`button is-dark cell is-col-start-${(index % MAX_GRID_COLUMNS) + 1}`}
+            onClick={() => onTake(index + 1)}
+            disabled={currentPlayer === UserType.Computer}
+          >
+            {index + 1}
+            <GiMatchHead />
+          </button>
+        ))}
       </div>
     </div>
   );

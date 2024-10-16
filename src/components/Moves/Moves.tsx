@@ -15,8 +15,8 @@ export const Moves: React.FC<Props> = ({ moves }) => {
 
       <div className="message-body is-scrolled">
         <ul className="content">
-          {moves.length !== 0 && moves.map((move: string) => (
-            <li>{move}</li>
+          {moves.length !== 0 && moves.map((move: string, index: number) => (
+            <li key={move + index}>{move}</li>
           ))}
         </ul>
       </div>
