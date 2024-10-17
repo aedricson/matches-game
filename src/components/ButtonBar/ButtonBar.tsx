@@ -1,5 +1,5 @@
 import React from "react";
-import { UserType } from "../../types/userType";
+import { UserType } from "../../types/UserType";
 
 import cn from "classnames";
 import { GiMatchHead } from "react-icons/gi";

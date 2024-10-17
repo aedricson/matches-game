@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import cn from 'classnames';
-import { UserType } from "../../types/userType";
+import cn from "classnames";
+import { UserType } from "../../types/UserType";
 
 type Props = {
-  matchesCount: number,
-  totalMatches: number,
-  currentPlayer: UserType,
-  isSettingsOpened: boolean,
-  onCurrentPlayerChange: (player: UserType) => void,
-  onTotalMatchesChange: (total: number) => void,
-  onMatchesCountChange: (count: number) => void,
-  onSettingsOpened: (value: boolean) => void,
-  onReset: (
-    total: number,
-    player: UserType,
-    count: number
-  ) => void
-}
+  matchesCount: number;
+  totalMatches: number;
+  currentPlayer: UserType;
+  isSettingsOpened: boolean;
+  onCurrentPlayerChange: (player: UserType) => void;
+  onTotalMatchesChange: (total: number) => void;
+  onMatchesCountChange: (count: number) => void;
+  onSettingsOpened: (value: boolean) => void;
+  onReset: (total: number, player: UserType, count: number) => void;
+};
 
 export const Settings: React.FC<Props> = ({
   matchesCount,
@@ -27,15 +23,18 @@ export const Settings: React.FC<Props> = ({
   onTotalMatchesChange,
   onMatchesCountChange,
   onSettingsOpened,
-  onReset
+  onReset,
 }) => {
-  const [updatedMatchesCount, setUpdatedMatchesCount] = useState<number>(matchesCount);
-  const [updatedTotalMatches, setUpdatedTotalMatches] = useState<number>(totalMatches);
-  const [updatedCurrentPlayer, setUpdatedCurrentPlayer] = useState<UserType>(currentPlayer);
+  const [updatedMatchesCount, setUpdatedMatchesCount] =
+    useState<number>(matchesCount);
+  const [updatedTotalMatches, setUpdatedTotalMatches] =
+    useState<number>(totalMatches);
+  const [updatedCurrentPlayer, setUpdatedCurrentPlayer] =
+    useState<UserType>(currentPlayer);
 
   const handleCountUpdate = (count: number) => {
     setUpdatedMatchesCount(count);
-  }
+  };
 
   const handleTotalUpdate = (total: number) => {
     let oddTotal = total;
@@ -45,11 +44,11 @@ export const Settings: React.FC<Props> = ({
     }
 
     setUpdatedTotalMatches(oddTotal);
-  }
+  };
 
   const handleCurrentPlayerUpdate = (player: UserType) => {
     setUpdatedCurrentPlayer(player);
-  }
+  };
 
   const handleSettingsApply = () => {
     onCurrentPlayerChange(updatedCurrentPlayer);
@@ -57,10 +56,10 @@ export const Settings: React.FC<Props> = ({
     onMatchesCountChange(updatedMatchesCount);
     onReset(updatedTotalMatches, updatedCurrentPlayer, updatedMatchesCount);
     onSettingsOpened(false);
-  }
+  };
 
   return (
-    <div className={cn('modal', { 'is-active': isSettingsOpened })}>
+    <div className={cn("modal", { "is-active": isSettingsOpened })}>
       <div className="modal-background"></div>
 
       <div className="modal-card">
@@ -70,12 +69,9 @@ export const Settings: React.FC<Props> = ({
             className="delete"
             aria-label="close"
             onClick={() => onSettingsOpened(false)}
-          >
-          </button>
+          ></button>
         </header>
         <section className="modal-card-body">
-          
-
           <div className="field is-horizontal">
             <div className="field-label is-normal">
               <label className="label">First move</label>
@@ -84,12 +80,18 @@ export const Settings: React.FC<Props> = ({
             <div className="field-body">
               <div className="field">
                 <p className="control">
-                <div className="select">
-                  <select onChange={event => handleCurrentPlayerUpdate(event.target.value)}>
-                    <option value={UserType.Player}>{UserType.Player}</option>
-                    <option value={UserType.Computer}>{UserType.Computer}</option>
-                  </select>
-                </div>
+                  <div className="select">
+                    <select
+                      onChange={(event) =>
+                        handleCurrentPlayerUpdate(event.target.value)
+                      }
+                    >
+                      <option value={UserType.Player}>{UserType.Player}</option>
+                      <option value={UserType.Computer}>
+                        {UserType.Computer}
+                      </option>
+                    </select>
+                  </div>
                 </p>
               </div>
             </div>
@@ -108,7 +110,7 @@ export const Settings: React.FC<Props> = ({
                     type="number"
                     value={updatedTotalMatches}
                     min={9}
-                    onChange={event => handleTotalUpdate(+event.target.value)}
+                    onChange={(event) => handleTotalUpdate(+event.target.value)}
                   />
                 </p>
               </div>
@@ -127,7 +129,7 @@ export const Settings: React.FC<Props> = ({
                     className="input"
                     type="number"
                     value={updatedMatchesCount}
-                    onChange={event => handleCountUpdate(+event.target.value)}
+                    onChange={(event) => handleCountUpdate(+event.target.value)}
                   />
                 </p>
               </div>
@@ -137,17 +139,11 @@ export const Settings: React.FC<Props> = ({
 
         <footer className="modal-card-foot">
           <div className="buttons">
-            <button
-              className="button is-success"
-              onClick={handleSettingsApply}
-            >
+            <button className="button is-success" onClick={handleSettingsApply}>
               Save
             </button>
 
-            <button
-              className="button"
-              onClick={() => onSettingsOpened(false)}
-            >
+            <button className="button" onClick={() => onSettingsOpened(false)}>
               Cancel
             </button>
           </div>
@@ -155,4 +151,4 @@ export const Settings: React.FC<Props> = ({
       </div>
     </div>
   );
-}
+};

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "./App.css";
-import { UserType } from "./types/userType";
+import { UserType } from "./types/UserType";
 import { Moves } from "./components/Moves";
 import { ButtonBar } from "./components/ButtonBar";
 import { GameField } from "./components/GameField";
@@ -68,10 +68,10 @@ export const App: React.FC = () => {
     setPlayerMatches(0);
     setComputerMatches(0);
     setTotalMatches(total);
-    setMatchesCount(count)
+    setMatchesCount(count);
     setCurrentPlayer(player);
     setMoves([]);
-  }
+  };
 
   useEffect(() => {
     if (totalMatches === 0) {
