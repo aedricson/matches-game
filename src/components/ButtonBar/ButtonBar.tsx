@@ -1,13 +1,13 @@
 import React from "react";
-import { UserType } from "../../types/UserType";
+import { UserType } from "../../types/userType";
 
 import cn from "classnames";
 import { GiMatchHead } from "react-icons/gi";
 
 type Props = {
-  currentPlayer: UserType,
-  onTake: (value: number) => void,
-  matchesCount: number
+  currentPlayer: UserType;
+  onTake: (value: number) => void;
+  matchesCount: number;
 };
 
 const MAX_GRID_COLUMNS = 3;
@@ -15,7 +15,7 @@ const MAX_GRID_COLUMNS = 3;
 export const ButtonBar: React.FC<Props> = ({
   currentPlayer,
   onTake,
-  matchesCount
+  matchesCount,
 }) => {
   return (
     <div className={`box container fixed-grid has-${MAX_GRID_COLUMNS}-cols`}>
@@ -31,7 +31,9 @@ export const ButtonBar: React.FC<Props> = ({
         {[...Array(matchesCount)].map((_, index) => (
           <button
             key={index}
-            className={`button is-dark cell is-col-start-${(index % MAX_GRID_COLUMNS) + 1}`}
+            className={`button is-dark cell is-col-start-${
+              (index % MAX_GRID_COLUMNS) + 1
+            }`}
             onClick={() => onTake(index + 1)}
             disabled={currentPlayer === UserType.Computer}
           >
