@@ -82,14 +82,16 @@ export const Settings: React.FC<Props> = ({
                 <p className="control">
                   <div className="select">
                     <select
-                      onChange={(event) =>
-                        handleCurrentPlayerUpdate(event.target.value)
-                      }
+                      onChange={(event) => {
+                        if (event.target.value === UserType.Player) {
+                          handleCurrentPlayerUpdate(UserType.Player)
+                        } else if (event.target.value === UserType.Computer) {
+                          handleCurrentPlayerUpdate(UserType.Computer)
+                        }
+                      }}
                     >
                       <option value={UserType.Player}>{UserType.Player}</option>
-                      <option value={UserType.Computer}>
-                        {UserType.Computer}
-                      </option>
+                      <option value={UserType.Computer}>{UserType.Computer}</option>
                     </select>
                   </div>
                 </p>
